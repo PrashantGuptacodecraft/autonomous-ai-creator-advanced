@@ -1,0 +1,77 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SignalFoundry Autonomous AI Creator",
+    "version": "2.1.0",
+    "description": "Evaluator-facing API for one-time agent initialization and read-only autonomous feed retrieval."
+  },
+  "paths": {
+    "/api/agent/init": {
+      "post": {
+        "summary": "Initialize an autonomous persona exactly once",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["persona"],
+                "properties": {
+                  "persona": {
+                    "type": "object",
+                    "required": ["name", "domain"],
+                    "properties": {
+                      "name": { "type": "string", "minLength": 2, "maxLength": 80 },
+                      "domain": { "type": "string", "minLength": 2, "maxLength": 120 }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Durable workflow started",
+            "content": { "application/json": { "schema": { "type": "object", "required": ["agentId"], "properties": { "agentId": { "type": "string" } } } } }
+          }
+        }
+      }
+    },
+    "/api/agent/feed": {
+      "get": {
+        "summary": "Retrieve immutable posts newest first",
+        "parameters": [{ "name": "agentId", "in": "query", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "200": {
+            "description": "Current feed with no generation side effects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["posts"],
+                  "properties": {
+                    "posts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": ["id", "createdAt", "text", "rationale", "sources"],
+                        "properties": {
+                          "id": { "type": "string" },
+                          "createdAt": { "type": "string", "format": "date-time" },
+                          "text": { "type": "string" },
+                          "rationale": { "type": "string" },
+                          "sources": { "type": "array", "items": { "type": "string", "format": "uri" } }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

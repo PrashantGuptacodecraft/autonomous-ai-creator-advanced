@@ -1,0 +1,24 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "regions": [
+    "bom1"
+  ],
+  "functions": {
+    "app/api/agent/init/route.ts": {
+      "maxDuration": 60
+    },
+    "app/api/agent/feed/route.ts": {
+      "maxDuration": 30
+    },
+    "app/api/dashboard/[agentId]/route.ts": {
+      "maxDuration": 30
+    },
+    "app/api/agent/status/route.ts": {
+      "maxDuration": 30
+    },
+    "app/api/health/route.ts": {
+      "maxDuration": 15
+    }
+  }
+}

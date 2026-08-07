@@ -1,0 +1,11 @@
+node_modules
+.next
+.swc
+.env
+.env.local
+.env.production
+.vercel
+coverage
+*.log
+.DS_Store
+app/.well-known/workflow

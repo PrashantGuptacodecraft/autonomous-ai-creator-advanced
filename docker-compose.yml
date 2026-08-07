@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: creator
+      POSTGRES_PASSWORD: creator
+      POSTGRES_DB: creator
+    ports:
+      - "5432:5432"
+    volumes:
+      - creator_data:/var/lib/postgresql/data
+volumes:
+  creator_data:

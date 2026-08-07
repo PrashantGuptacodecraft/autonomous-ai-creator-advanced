@@ -1,0 +1,41 @@
+{
+  "name": "autonomous-ai-creator",
+  "version": "2.1.0",
+  "private": true,
+  "description": "SignalFoundry: a durable evidence-first autonomous AI editorial persona with corroboration, memory, quality gates, and transparent publishing.",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx scripts/seed-demo.ts",
+    "verify:static": "node scripts/static-verify.mjs",
+    "verify": "npm run verify:static && npm run typecheck && npm run test && npm run test:simulation && npm run build",
+    "workflow:ui": "workflow web",
+    "test:simulation": "tsx scripts/simulate-48h.ts"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "1.1.0",
+    "ai": "7.0.40",
+    "fast-xml-parser": "5.10.1",
+    "next": "16.2.12",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "workflow": "4.6.2",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.0.0"
+  }
+}
