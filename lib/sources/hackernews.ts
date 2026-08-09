@@ -22,7 +22,9 @@ interface HackerNewsItem {
 const KEYWORDS = [
   "ai", "artificial intelligence", "machine learning", "llm", "model", "agent",
   "robot", "open source", "developer", "database", "compiler", "security",
-  "inference", "vector", "rag", "mcp", "gpu",
+  "inference", "vector", "rag", "mcp", "gpu", "vulnerability", "cve", "zero-day",
+  "breach", "cryptography", "privacy", "patch", "cybersecurity", "malware",
+  "exploit", "phishing", "ransomware", "hacker", "authentication",
 ];
 
 export class HackerNewsAdapter implements SourceAdapter {
@@ -30,7 +32,7 @@ export class HackerNewsAdapter implements SourceAdapter {
 
   async discover(context: DiscoveryContext): Promise<DiscoveredSource[]> {
     const indexResponse = await safeFetch("https://hacker-news.firebaseio.com/v0/newstories.json", {}, 8_000);
-    const ids = ((await indexResponse.json()) as number[]).slice(0, 72);
+    const ids = ((await indexResponse.json()) as number[]).slice(0, 150);
     const settled = await mapWithConcurrency(
       ids,
       getConfig().SOURCE_FETCH_CONCURRENCY,

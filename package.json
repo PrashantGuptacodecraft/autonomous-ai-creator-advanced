@@ -7,7 +7,7 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "cross-env NODE_OPTIONS=--dns-result-order=ipv4first next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
     "typecheck": "tsc --noEmit",
@@ -21,8 +21,10 @@
     "test:simulation": "tsx scripts/simulate-48h.ts"
   },
   "dependencies": {
+    "@atproto/api": "^0.20.38",
     "@neondatabase/serverless": "1.1.0",
     "ai": "7.0.40",
+    "cross-env": "^10.1.0",
     "fast-xml-parser": "5.10.1",
     "next": "16.2.12",
     "react": "19.2.8",

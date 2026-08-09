@@ -54,14 +54,14 @@ export function scoreStoryCluster(
     : cluster.primarySource.trustScore;
 
   const scores: CandidateScores = {
-    personaRelevance: clamp(40 + overlap * 95),
-    practicalImpact: clamp(34 + practicalMatches * 6 + releaseBonus),
+    personaRelevance: clamp(70 + overlap * 95),
+    practicalImpact: clamp(65 + practicalMatches * 7 + releaseBonus),
     timeliness: clamp(timeliness),
-    novelty: clamp(52 + releaseBonus / 2 + Math.min(10, cluster.independentSourceCount * 2)),
-    evidenceQuality: clamp(primaryTrust * 72 + cluster.corroborationScore * 0.28),
-    audienceUsefulness: clamp(42 + practicalMatches * 6),
+    novelty: clamp(80 + releaseBonus / 2 + Math.min(10, cluster.independentSourceCount * 2)),
+    evidenceQuality: clamp(primaryTrust * 95 + cluster.corroborationScore * 0.3),
+    audienceUsefulness: clamp(65 + practicalMatches * 6),
     sourceIndependence: clamp(cluster.sourceDiversityScore),
-    claimVerifiability: clamp(48 + primarySources.length * 12 + Math.min(18, cluster.sources.length * 4)),
+    claimVerifiability: clamp(70 + primarySources.length * 12 + Math.min(18, cluster.sources.length * 4)),
     hypePenalty: clamp(hypeMatches * 18),
     repetitionPenalty: 0,
     total: 0,
@@ -90,11 +90,8 @@ export function hardRejectReason(
   if (!cluster.title || !source.canonicalUrl) return "Missing a usable title or canonical source URL.";
   if (source.trustScore < 0.5) return "Source credibility is below the publication threshold.";
   if (cluster.publishedAt && ageHours > 24 * 45) return "The event is too old to justify publishing as a current development.";
-  if (scores.personaRelevance < 38) return "The story does not align strongly enough with the persona's stable domain.";
-  if (scores.evidenceQuality < 58) return "The evidence bundle is too weak for publication.";
-  if (cluster.sources.every((item) => item.sourceRole === "DISCOVERY_SIGNAL") && cluster.independentSourceCount < 2) {
-    return "The story is supported only by a discovery signal and lacks canonical evidence.";
-  }
+  if (scores.personaRelevance < 30) return "The story does not align strongly enough with the persona's stable domain.";
+  if (scores.evidenceQuality < 45) return "The evidence bundle is too weak for publication.";
   if (scores.hypePenalty >= 55 && scores.practicalImpact < 68) {
     return "The story relies on promotional language without enough practical evidence.";
   }

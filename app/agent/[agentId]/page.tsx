@@ -262,6 +262,15 @@ export default async function AgentDashboardPage({
                 <div><h3>{String(decision.title)}</h3><p>{String(decision.reason)}</p><small>{String(decision.comparison || decision.why_now || "")}</small></div>
                 <div className="decision-score"><strong>{Math.round(Number(scores.total ?? 0))}</strong><span>score</span></div>
                 <div className="decision-evidence"><strong>{Number(decision.independent_source_count ?? 1)}</strong><span>sources</span></div>
+                <div style={{ flexBasis: "100%", fontSize: "0.8rem", color: "var(--muted)", marginTop: "8px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
+                  <span title="Persona Relevance">PR: {Math.round(Number(scores.personaRelevance ?? 0))}</span>
+                  <span title="Evidence Quality">EQ: {Math.round(Number(scores.evidenceQuality ?? 0))}</span>
+                  <span title="Practical Impact">PI: {Math.round(Number(scores.practicalImpact ?? 0))}</span>
+                  <span title="Novelty">NV: {Math.round(Number(scores.novelty ?? 0))}</span>
+                  <span title="Usefulness">AU: {Math.round(Number(scores.audienceUsefulness ?? 0))}</span>
+                  <span title="Verifiability">CV: {Math.round(Number(scores.claimVerifiability ?? 0))}</span>
+                  {Number(scores.hypePenalty) > 0 && <span title="Hype Penalty" style={{ color: "var(--red)" }}>HYPE: -{Math.round(Number(scores.hypePenalty ?? 0))}</span>}
+                </div>
               </article>
             );
           })}

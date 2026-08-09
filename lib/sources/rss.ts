@@ -6,6 +6,19 @@ import type { DiscoveryContext, SourceAdapter } from "@/lib/sources/types";
 import { asArray, createSource, parseDate } from "@/lib/sources/common";
 
 const DEFAULT_FEEDS = [
+  { name: "Schneier on Security", url: "https://www.schneier.com/feed/atom/", trust: 0.95 },
+  { name: "The Hacker News", url: "https://feeds.feedburner.com/TheHackersNews", trust: 0.90 },
+  { name: "BleepingComputer", url: "https://www.bleepingcomputer.com/feed/", trust: 0.92 },
+  { name: "Krebs on Security", url: "https://krebsonsecurity.com/feed/", trust: 0.96 },
+  { name: "Dark Reading", url: "https://www.darkreading.com/rss.xml", trust: 0.90 },
+  { name: "The Daily Swig", url: "https://portswigger.net/daily-swig/rss", trust: 0.91 },
+  { name: "CSO Online", url: "https://www.csoonline.com/feed/", trust: 0.85 },
+  { name: "Naked Security", url: "https://nakedsecurity.sophos.com/feed/", trust: 0.90 },
+  { name: "SecurityWeek", url: "https://www.securityweek.com/feed/", trust: 0.88 },
+  { name: "Cloudflare Blog", url: "https://blog.cloudflare.com/rss/", trust: 0.94 },
+  { name: "OpenAI Blog", url: "https://openai.com/blog/rss.xml", trust: 0.95 },
+  { name: "Google TAG", url: "https://blog.google/threat-analysis-group/rss/", trust: 0.97 },
+  { name: "MSRC", url: "https://msrc.microsoft.com/blog/feed", trust: 0.98 },
   { name: "Google AI", url: "https://blog.google/technology/ai/rss/", trust: 0.96 },
   { name: "GitHub AI & ML", url: "https://github.blog/ai-and-ml/feed/", trust: 0.94 },
   { name: "Hugging Face", url: "https://huggingface.co/blog/feed.xml", trust: 0.93 },

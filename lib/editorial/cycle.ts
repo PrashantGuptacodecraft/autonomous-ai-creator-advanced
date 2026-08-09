@@ -23,6 +23,7 @@ import {
   updatePublishedRunMetrics,
 } from "@/lib/db/repository";
 import { discoverTopics } from "@/lib/sources/discover";
+import { publishToSocialNetworks } from "@/lib/social/publisher";
 import { hardRejectReason, scoreStoryCluster } from "@/lib/editorial/scoring";
 import {
   fallbackDecisions,
@@ -458,6 +459,7 @@ export async function runEditorialCycle(agentId: string, cycleNumber: number): P
     });
     const nextCycleAt = nextCycleDate(agentId, cycleNumber, "PUBLISHED");
     await setNextCycleAt(agentId, nextCycleAt);
+    await publishToSocialNetworks(draft.text);
 
     let reflection = fallbackReflection(true, discoveredCount, rejectedCount);
     if (aiAvailable()) {
